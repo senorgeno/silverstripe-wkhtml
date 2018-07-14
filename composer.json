@@ -1,7 +1,7 @@
 {
 	"name": "heyday/silverstripe-wkhtml",
 	"description": "Provides Wkhtml functionality in SilverStripe",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"license": "MIT",
 	"autoload": {
 		"psr-0": {

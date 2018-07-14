@@ -2,37 +2,41 @@
 
 namespace Heyday\SilverStripe\WkHtml\Input;
 
-use SS_HTTPRequest;
-use SS_HTTPResponse;
-use Session;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
+
 use ReflectionMethod;
+use SilverStripe\Control\Session;
 
 /**
  * Takes a SS_HTTPRequest and produces html input for PDF
  */
 class Request implements InputInterface
 {
+
     /**
-     * @var \SS_HTTPRequest
+     * @var HTTPRequest
      */
     protected $request;
     /**
-     * @var \Session
+     * @var Session
      */
     protected $session;
     /**
-     * @var \ReflectionMethod
+     * @var ReflectionMethod
      */
     protected $handleMethod;
+
     /**
-     * @param \SS_HTTPRequest $request
-     * @param bool           $session
+     * @param HTTPRequest $request
+     * @param array $session
      */
-    public function __construct(SS_HTTPRequest $request, $session = array())
+    public function __construct(HTTPRequest $request, $session = array())
     {
         $this->request = $request;
         $this->setSession($session);
     }
+
     /**
      * @param $session
      * @throws \RuntimeException
@@ -47,16 +51,19 @@ class Request implements InputInterface
             throw new \RuntimeException('Session argument must be an array or a Session object');
         }
     }
+
     /**
-     * @return \Session
+     * @return Session
      */
     public function getSession()
     {
         return $this->session;
     }
+
     /**
      * @return string
-     * @throws \RuntimeException
+     * @throws RuntimeException
+     * @throws \ReflectionException
      */
     public function process()
     {
@@ -66,9 +73,10 @@ class Request implements InputInterface
             $this->session,
             \DataModel::inst()
         );
-        if ($result instanceof SS_HTTPResponse) {
+        if ($result instanceof HTTPResponse) {
             ob_start();
             $result->output();
+
             return ob_get_clean();
         } elseif (is_string($result)) {
             return $result;
@@ -76,6 +84,7 @@ class Request implements InputInterface
             throw new \RuntimeException('Can\'t handle output from request');
         }
     }
+
     /**
      * @param ReflectionMethod $handleMethod
      */
@@ -83,8 +92,10 @@ class Request implements InputInterface
     {
         $this->handleMethod = $handleMethod;
     }
+
     /**
      * @return ReflectionMethod
+     * @throws \ReflectionException
      */
     protected function getHandleMethod()
     {

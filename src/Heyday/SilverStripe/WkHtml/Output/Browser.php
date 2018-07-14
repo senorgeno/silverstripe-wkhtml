@@ -42,7 +42,7 @@ class Browser implements OutputInterface
     /**
      * @param                    $input
      * @param GeneratorInterface $generator
-     * @return Response
+     * @return HTTPResponse
      */
     public function process($input, GeneratorInterface $generator)
     {

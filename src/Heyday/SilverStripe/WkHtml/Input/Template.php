@@ -2,8 +2,11 @@
 
 namespace Heyday\SilverStripe\WkHtml\Input;
 
-use SSViewer;
-use SSViewer_FromString;
+use SilverStripe\View\ArrayData;
+use SilverStripe\View\SSViewer;
+use SilverStripe\View\SSViewer_FromString;
+
+//use SSViewer_FromString;
 
 /**
  * Class Template

@@ -2,13 +2,13 @@
 
 namespace Heyday\SilverStripe\WkHtml\Output;
 
-use SS_HTTPResponse;
+use SilverStripe\Control\HTTPResponse as SSHTTPResponse;
 
 /**
  * Class Response
  * @package Heyday\SilverStripe\WkHtml\Output
  */
-class HTTPResponse extends SS_HTTPResponse
+class HTTPResponse extends SSHTTPResponse
 {
     /**
      * @var array

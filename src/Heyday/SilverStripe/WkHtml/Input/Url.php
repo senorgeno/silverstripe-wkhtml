@@ -2,7 +2,8 @@
 
 namespace Heyday\SilverStripe\WkHtml\Input;
 
-use Director;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
 
 /**
  * Class Url
@@ -45,9 +46,10 @@ class Url implements InputInterface
      */
     public function process()
     {
+
         if ($this->siteUrl) {
             ob_start();
-            Director::direct($this->url, \DataModel::inst());
+            Controller::curr()->redirect($this->url);
             return ob_get_clean();
         } else {
             return @file_get_contents($this->url);
